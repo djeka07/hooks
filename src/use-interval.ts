@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 const useInterval = (callback: () => void, interval = 100) => {
-  const intervalId = useRef<NodeJS.Timeout>();
+  const intervalId = useRef<NodeJS.Timeout>(undefined);
 
   const clear = useCallback(() => {
     clearInterval(intervalId.current);
