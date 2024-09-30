@@ -1,10 +1,10 @@
 {
   "name": "@djeka07/hooks",
-  "version": "1.0.0-rc-0.2",
+  "version": "1.0.0-rc-0.5",
   "private": false,
   "description": "A set of react hooks",
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
@@ -15,7 +15,7 @@
     "test": "vitest",
     "lint": "eslint .",
     "rollup": "rollup -c --bundleConfigAsCjs",
-    "prepublish": "yarn build"
+    "prepare": "yarn build"
   },
   "files": [
     "./dist/**/*"
