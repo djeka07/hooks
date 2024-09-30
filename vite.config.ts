@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import dts from 'vite-plugin-dts';
-import preserveDirectives from 'rollup-preserve-directives';
 import { resolve } from 'path';
+import preserveDirectives from 'rollup-preserve-directives';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
@@ -14,16 +14,16 @@ export default defineConfig({
   ],
   build: {
     copyPublicDir: false,
+    emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'index',
-      formats: ['es'],
+      name: 'hooks',
       fileName: 'index',
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime', 'framer-motion', 'polished'],
       output: {
-        preserveModules: true,
+        preserveModules: false,
         inlineDynamicImports: false,
         globals: {
           react: 'React',

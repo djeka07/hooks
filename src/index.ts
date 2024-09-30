@@ -1,3 +1,5 @@
+'use client';
+
 export { default as useClickOutside } from './use-click-outside';
 export { default as useDebounce } from './use-debounce';
 export { default as useDidMount } from './use-did-mount';
