@@ -1,6 +1,6 @@
 {
   "name": "@djeka07/hooks",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "private": false,
   "description": "A set of react hooks",
   "type": "module",

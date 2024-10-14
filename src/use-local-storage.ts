@@ -2,7 +2,7 @@
 
 import { Dispatch, useCallback, useState } from 'react';
 
-export const useLocaleStorage = <T>(key: string, initialValue: T) => {
+const useLocalStorage = <T>(key: string, initialValue: T) => {
   const [state, setState] = useState<T>(() => {
     try {
       const item = localStorage.getItem(key);
@@ -31,3 +31,5 @@ export const useLocaleStorage = <T>(key: string, initialValue: T) => {
   );
   return [state, updateState] as const;
 };
+
+export default useLocalStorage;
