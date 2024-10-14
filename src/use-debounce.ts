@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import useDidUpdate from './use-did-update';
 
-const useDebounce = (value: string, delay: number): string => {
+const useDebounce = <T = string>(value: T, delay: number): T => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useDidUpdate(() => {

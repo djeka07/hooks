@@ -1,6 +1,6 @@
 {
   "name": "@djeka07/hooks",
-  "version": "0.0.12",
+  "version": "0.0.17",
   "private": false,
   "description": "A set of react hooks",
   "type": "module",
@@ -17,7 +17,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && tsc && tsup",
+    "build": "yarn clean && tsc && vite build",
     "clean": "rm -rf ./dist",
     "test": "vitest",
     "lint": "eslint .",
@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/djeka07/hooks#readme",
   "dependencies": {
+    "@djeka07/utils": "^1.0.9",
     "react": "18.3.1"
   },
   "devDependencies": {
@@ -71,6 +72,7 @@
     "vitest": "^2.1.1"
   },
   "peerDependencies": {
-    "react": "18.3.1"
+    "react": "18.3.1",
+    "@djeka07/utils": "^1.0.9"
   }
 }

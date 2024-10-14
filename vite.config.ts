@@ -14,20 +14,20 @@ export default defineConfig({
   ],
   build: {
     copyPublicDir: false,
-    emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'hooks',
-      fileName: 'index',
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : format}`,
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'framer-motion', 'polished'],
+      external: ['react', 'react/jsx-runtime', '@djeka07/utils'],
       output: {
-        preserveModules: false,
+        preserveModules: true,
         inlineDynamicImports: false,
         globals: {
           react: 'React',
           'react/jsx-runtime': 'react/jsx-runtime',
+          '@djeka07/utils': '@djeka07/utils',
         },
       },
     },
