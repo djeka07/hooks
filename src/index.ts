@@ -6,3 +6,7 @@ export { default as useEventListener } from './use-event-listener';
 export { default as useInterval } from './use-interval';
 export { default as usePrevious } from './use-previous';
 export { default as useWillUnmount } from './use-will-unmount';
+export { default as useElementSize } from './use-element-size';
+export { default as useLocalStorage } from './use-local-storage';
+
+export type { Dimension } from './use-element-size';
