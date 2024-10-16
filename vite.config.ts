@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { copyFileSync } from 'node:fs';
 import { resolve } from 'path';
 import preserveDirectives from 'rollup-preserve-directives';
 import { defineConfig } from 'vite';
@@ -9,7 +10,15 @@ export default defineConfig({
   plugins: [
     preserveDirectives(),
     react(),
-    dts({ include: 'src', exclude: ['**/*.stories.tsx'], insertTypesEntry: true }),
+    dts({
+      include: 'src',
+      exclude: ['**/*.stories.tsx'],
+      insertTypesEntry: true,
+      rollupTypes: true,
+      afterBuild: () => {
+        copyFileSync('dist/index.d.cts', 'dist/index.d.mts');
+      },
+    }),
     tsconfigPaths(),
   ],
   build: {
