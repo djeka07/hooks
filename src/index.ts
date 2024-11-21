@@ -8,5 +8,6 @@ export { default as usePrevious } from './use-previous';
 export { default as useWillUnmount } from './use-will-unmount';
 export { default as useElementSize } from './use-element-size';
 export { default as useLocalStorage } from './use-local-storage';
+export { default as useFirstInViewport } from './use-first-in-viewport';
 
 export type { Dimension } from './use-element-size';
