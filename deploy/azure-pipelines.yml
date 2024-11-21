@@ -89,4 +89,4 @@ stages:
             inputs:
               filePath: "$(Build.SourcesDirectory)/Infrastructure/scripts/publish.sh"
               arguments: "$(isRc) $(npmToken)"
-              workingDirectory: "$(Build.SourcesDirectory)/ui"
+              workingDirectory: "$(Build.SourcesDirectory)/hooks"
