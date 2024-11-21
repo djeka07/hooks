@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-const useFirstInViewport = (ref: RefObject<HTMLElement>, observerOptions: IntersectionObserverInit) => {
+const useFirstInViewport = (ref: RefObject<HTMLElement | null>, observerOptions: IntersectionObserverInit) => {
   const [entered, setEntered] = useState(false);
   const observerRef = useRef(
     new IntersectionObserver(([entry]) => {
