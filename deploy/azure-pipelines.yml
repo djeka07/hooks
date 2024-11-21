@@ -1,0 +1,92 @@
+trigger:
+
+- main
+- feature/*
+
+resources:
+  repositories:
+    - repository: Infrastructure
+      type: git
+      name: Webs/Infrastructure
+
+variables:
+  - name: appToken
+    value: $(token)
+  - name: npmToken
+    value: $(NPM_TOKEN)
+  - name: accountName
+    value: $(ACCOUNT_NAME)
+  - name: accountKey
+    value: $(ACCOUNT_KEY)
+  - name: containerName
+    value: $(CONTAINER_NAME)
+
+stages:
+  - stage: RunTest
+    displayName: Run tests
+    pool:
+      name: Ubuntu WSL
+    jobs:
+    - job: Test
+      steps:
+      - checkout: self
+        clean: false
+        submodules: true
+      - task: Yarn@3
+        displayName: Install Packages
+        inputs:
+          projectDirectory: "$(Build.SourcesDirectory)"
+          arguments: 'install --frozen-lockfile'
+      - task: Yarn@3
+        displayName: Run test
+        inputs:
+          projectDirectory: "$(Build.SourcesDirectory)"
+          arguments: test
+  - stage: SetVariables
+    displayName: Set publish variables
+    dependsOn: RunTest
+    pool:
+      name: Ubuntu WSL
+    jobs:
+    - job: SetVariables
+      steps:
+        - checkout: self
+        - checkout: Infrastructure
+        - task: Bash@3
+          displayName: Check package version
+          inputs:
+            filePath: "$(Build.SourcesDirectory)/Infrastructure/scripts/check-npm-version.sh"
+            arguments: "@djeka07/hooks"
+            workingDirectory: "$(Build.SourcesDirectory)/hooks"
+          name: OutputVar
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              # Write your commands here
+              echo "variables: $(OutputVar.SHOULD_PUBLISH) $(OutputVar.IS_RC) $(OutputVar.PACKAGE_VERSION)"
+  - stage: Publish
+    displayName: Publish to NPM
+    dependsOn: SetVariables
+    condition: eq(dependencies.SetVariables.outputs['SetVariables.OutputVar.SHOULD_PUBLISH'], true)
+    pool:
+      name: Ubuntu WSL
+    jobs:
+      - job: Publish
+        variables:
+          isRc: $[stageDependencies.SetVariables.SetVariables.outputs['OutputVar.IS_RC']]
+          packageVersion:  $[stageDependencies.SetVariables.SetVariables.outputs['OutputVar.PACKAGE_VERSION']]
+        steps:
+          - checkout: self
+          - checkout: Infrastructure
+          - task: Yarn@3
+            displayName: Install Packages
+            inputs:
+              projectDirectory: "$(Build.SourcesDirectory)/hooks"
+              arguments: 'install --frozen-lockfile'
+          - task: Bash@3
+            displayName: 'Publish package to NPM'
+            inputs:
+              filePath: "$(Build.SourcesDirectory)/Infrastructure/scripts/publish.sh"
+              arguments: "$(isRc) $(npmToken)"
+              workingDirectory: "$(Build.SourcesDirectory)/ui"
