@@ -1,6 +1,6 @@
 {
   "name": "@djeka07/hooks",
-  "version": "1.0.0-rc-0.17",
+  "version": "1.0.0-rc-0.18",
   "description": "A set of react hooks",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -24,7 +24,6 @@
     "clean": "rm -rf ./dist",
     "test": "vitest",
     "lint": "eslint .",
-    "rollup": "rollup -c --bundleConfigAsCjs",
     "prepublishOnly": "yarn build"
   },
   "sideEffects": false,
