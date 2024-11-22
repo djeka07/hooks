@@ -16,7 +16,7 @@ export default defineConfig({
       insertTypesEntry: true,
       rollupTypes: true,
       afterBuild: () => {
-        copyFileSync('dist/index.d.cts', 'dist/index.d.mts');
+        copyFileSync('dist/index.d.mts', 'dist/index.d.cts');
       },
     }),
     tsconfigPaths(),
