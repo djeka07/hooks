@@ -1,6 +1,9 @@
 import { RefObject, useEffect, useState } from 'react';
 
-const useFirstInViewport = (ref: RefObject<HTMLElement | null>, observerOptions: IntersectionObserverInit) => {
+const useFirstInViewport = (
+  ref: RefObject<HTMLElement | null>,
+  { triggerOnce, ...rest }: IntersectionObserverInit & { triggerOnce?: boolean } = { triggerOnce: true },
+) => {
   const [entered, setEntered] = useState(false);
 
   useEffect(() => {
@@ -10,9 +13,9 @@ const useFirstInViewport = (ref: RefObject<HTMLElement | null>, observerOptions:
       if (entry) {
         setEntered(entry.isIntersecting);
       }
-    }, observerOptions);
+    }, rest);
 
-    if (entered) {
+    if (entered && triggerOnce) {
       observer.disconnect();
       return;
     }
@@ -22,7 +25,7 @@ const useFirstInViewport = (ref: RefObject<HTMLElement | null>, observerOptions:
     }
 
     return () => observer.disconnect();
-  }, [entered, observerOptions, ref]);
+  }, [entered, rest, ref, triggerOnce]);
 
   return entered;
 };
