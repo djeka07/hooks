@@ -7,7 +7,6 @@ const useFirstInViewport = (
   const [entered, setEntered] = useState(false);
 
   useEffect(() => {
-    console.log('running effect');
     const currentRef = ref.current;
     const observer = new IntersectionObserver(([entry]) => {
       if (entry) {
