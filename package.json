@@ -1,6 +1,6 @@
 {
   "name": "@djeka07/hooks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A set of react hooks",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

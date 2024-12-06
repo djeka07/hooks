@@ -30,12 +30,13 @@ export default defineConfig({
       fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime'],
+      external: ['react', 'react/jsx-runtime', '@djeka07/utils'],
       output: {
         preserveModules: true,
         globals: {
           react: 'React',
           'react/jsx-runtime': 'react/jsx-runtime',
+          '@djeka07/utils': '@djeka07/utils',
         },
       },
     },
