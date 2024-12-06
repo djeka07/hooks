@@ -1,6 +1,6 @@
 {
   "name": "@djeka07/hooks",
-  "version": "1.0.0-rc-0.21",
+  "version": "1.0.0",
   "description": "A set of react hooks",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -76,7 +76,6 @@
     "vitest": "^2.1.5"
   },
   "peerDependencies": {
-    "@djeka07/utils": "^1.0.11",
     "react": "19.0.0-rc.1"
   },
   "packageManager": "yarn@4.5.1"
