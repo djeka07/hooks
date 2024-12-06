@@ -784,7 +784,6 @@ __metadata:
     vite-tsconfig-paths: "npm:^4.3.2"
     vitest: "npm:^2.1.5"
   peerDependencies:
-    "@djeka07/utils": ^1.0.11
     react: 19.0.0-rc.1
   languageName: unknown
   linkType: soft
